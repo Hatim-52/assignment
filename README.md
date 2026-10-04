@@ -58,8 +58,8 @@ A **Retrieval-Augmented Generation (RAG)** chatbot that answers questions strict
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/agentic-ai-rag-chatbot.git
-cd agentic-ai-rag-chatbot
+git clone https://github.com/Hatim-52/assignment.git
+cd assignment
 ```
 
 ### 2. Create Virtual Environment
@@ -127,7 +127,7 @@ Open [http://localhost:8501](http://localhost:8501) in your browser.
 ```bash
 python api.py
 # or
-uvicorn api:app --host 0.0.0.0 --port 8000 --reload
+uvicorn src.api.server:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 API docs at [http://localhost:8000/docs](http://localhost:8000/docs).
@@ -135,7 +135,7 @@ API docs at [http://localhost:8000/docs](http://localhost:8000/docs).
 **Option C — Command Line:**
 
 ```bash
-python rag_pipeline.py "What is Agentic AI?"
+python -m src.core.rag_pipeline "What is Agentic AI?"
 ```
 
 ---
@@ -183,18 +183,34 @@ Returns service health and configuration status.
 ## 📁 Project Structure
 
 ```
-agentic-ai-rag-chatbot/
-├── config.py            # Centralized configuration & env loading
-├── ingest.py            # PDF → chunks → embeddings → Pinecone
-├── rag_pipeline.py      # LangGraph RAG pipeline (4 nodes)
-├── api.py               # FastAPI REST API
-├── app.py               # Streamlit Chat UI
-├── requirements.txt     # Python dependencies
-├── .env.example         # Environment variable template
-├── .gitignore           # Git ignore rules
-├── data/
-│   └── Ebook-Agentic-AI.pdf  # Source PDF (not committed)
-└── README.md            # This file
+assignment/
+├── app.py                  # Entry point → Streamlit UI
+├── api.py                  # Entry point → FastAPI server
+├── ingest.py               # Entry point → PDF ingestion
+├── requirements.txt        # Python dependencies
+├── .env.example            # Environment variable template
+├── .gitignore              # Git ignore rules
+├── README.md               # This file
+│
+├── src/                    # Source package
+│   ├── __init__.py
+│   │
+│   ├── core/               # Core logic
+│   │   ├── __init__.py
+│   │   ├── config.py       # Centralized configuration
+│   │   ├── ingest.py       # PDF → chunks → embeddings → Pinecone
+│   │   └── rag_pipeline.py # LangGraph RAG pipeline (4 nodes)
+│   │
+│   ├── api/                # REST API layer
+│   │   ├── __init__.py
+│   │   └── server.py       # FastAPI routes & models
+│   │
+│   └── ui/                 # Frontend layer
+│       ├── __init__.py
+│       └── chat_app.py     # Streamlit chat interface
+│
+└── data/
+    └── Ebook-Agentic-AI.pdf  # Source PDF (not committed)
 ```
 
 ---

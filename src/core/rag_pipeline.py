@@ -13,7 +13,7 @@ from langchain_core.output_parsers import StrOutputParser
 from pinecone import Pinecone
 from langgraph.graph import StateGraph, END
 
-from config import settings
+from src.core.config import settings
 
 
 # ──────────────────────────────────────────────
